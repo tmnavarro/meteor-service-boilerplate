@@ -1,3 +1,6 @@
 [submodule "packages/meteor-crud"]
 	path = packages/meteor-crud
 	url = https://github.com/Centiq/meteor-crud.git
+[submodule "imports/core"]
+	path = imports/core
+	url = https://github.com/RedLeap/meteor-service-core.git
