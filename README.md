@@ -22,7 +22,7 @@ version: '2'
 services:
 
   ms-boilerplate:
-    image: jakelacey2012/ms-boilerplate
+    image: redleap/ms-boilerplate
     environment:
       - PORT=3000
       - ROOT_URL=http://localhost:3000
