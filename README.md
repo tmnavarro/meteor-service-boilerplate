@@ -3,12 +3,17 @@
 A common way of creating, interfacing and testing micro services.
 
 ## Testing
-Dependency injection allows the tests on the micro service to run very quickly
+Dependency injection allows the tests to run very quickly **(under one minute)**
 in development and within a CI workflow, this is done my injecting dependencies
 like `Meteor`, `Crud` and any other imports that are exported at runtime of the
 meteor application.
 
- So please follow this rule and expect the way you code to change.
+ So please follow this rule.
+
+Testing is automatically configured for travis but setting it up for other environments
+is trivial so please open a ISSUE/PR if your interested.
+
+`yarn test` or `yarn run test-watch`
 
 ## Build
 To create a docker image run `make build`
