@@ -26,4 +26,7 @@ ServiceRepository.register(ServiceModel, {
 /**
  * Create a new instance of the ping service.
  */
-new PingService(Crud, ServiceModel);
+new PingService(Crud, {
+  ServiceModel,
+  ServiceRepository
+}, process.env.ROOT_URL);

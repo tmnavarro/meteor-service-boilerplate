@@ -1,11 +1,19 @@
 
 export class PingService {
 
-  constructor(Crud, ServiceModel) {
+  constructor(Crud, { ServiceModel, ServiceRepository }, ROOT_URL) {
 
     this.ServiceModel = ServiceModel;
 
-    Crud.read('ping', this.endpoint.bind(this));
+    // register the endpoint.
+    ServiceRepository.registerEndpoint({
+      Crud,
+      type: 'read',
+      name: 'ping',
+      handler: this.endpoint.bind(this),
+      ROOT_URL,
+      ServiceModel,
+    });
 
   }
 
