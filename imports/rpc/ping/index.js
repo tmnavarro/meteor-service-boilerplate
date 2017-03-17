@@ -1,27 +1,19 @@
 
-/**
- * read endpoint
- *  - <ROOT_URL>/rpc/ping
- */
-export const PingRPC = (Crud, handler) => {
+export class PingService {
 
-  return Crud.read("ping", handler);
+  constructor(Crud, ServiceModel) {
 
-}
+    this.ServiceModel = ServiceModel;
 
-/**
- * Handler to return ping of 1.
- *
- * @param Object   req
- *           The request object.
- *
- * @param Object   res
- *           The response object.
- */
-export const PingHandler = (req, res) => {
+    Crud.read('ping', this.endpoint.bind(this));
 
-  res.end({
-    ping: 1,
-  });
+  }
+
+  endpoint(req, res) {
+
+    // Currently this will return all the services that have been registerd
+    res.end(this.ServiceModel.find());
+
+  }
 
 }
