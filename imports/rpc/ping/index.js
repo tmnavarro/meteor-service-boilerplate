@@ -11,7 +11,6 @@ export class PingService {
 
   endpoint(req, res) {
 
-    // Currently this will return all the services that have been registerd
     res.end(this.ServiceModel.find());
 
   }

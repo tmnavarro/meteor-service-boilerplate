@@ -19,7 +19,9 @@ const ServiceModel = ServiceRepository.ModelFactory(Mongo, Class);
 /**
  * Resigster the service...
  */
-ServiceRepository.register(ServiceModel);
+ServiceRepository.register(ServiceModel, {
+  ROOT_URL: process.env.ROOT_URL,
+});
 
 /**
  * Create a new instance of the ping service.
