@@ -5,7 +5,6 @@ export class PingService {
 
     this.ServiceModel = ServiceModel;
 
-    // register the endpoint.
     ServiceRepository.registerEndpoint({
       Crud,
       type: 'read',
