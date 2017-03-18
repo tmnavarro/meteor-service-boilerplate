@@ -70,6 +70,7 @@ export class ServiceRepository {
 
     Crud[type](name, (req, res) => {
 
+      const service = this.model.findOne(this.ROOT_URL);
       service.lastAccess = new Date();
       service.save();
 

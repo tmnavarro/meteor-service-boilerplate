@@ -1,16 +1,26 @@
 
+let instance = null;
+
 export class PingService {
 
   constructor(Crud, ServiceRepository) {
 
-    this.ServiceRepository = ServiceRepository;
+    if (!instance) {
 
-    ServiceRepository.registerEndpoint({
-      Crud,
-      type: 'read',
-      name: 'ping',
-      handler: this.endpoint.bind(this),
-    });
+      instance = this;
+
+      this.ServiceRepository = ServiceRepository;
+
+      ServiceRepository.registerEndpoint({
+        Crud,
+        type: 'read',
+        name: 'ping',
+        handler: this.endpoint.bind(this),
+      });
+
+    }
+
+    return instance;
 
   }
 
