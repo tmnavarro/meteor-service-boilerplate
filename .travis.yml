@@ -9,4 +9,5 @@ cache:
     - node_modules
 
 script:
+  - yarn run cucumber
   - yarn test
