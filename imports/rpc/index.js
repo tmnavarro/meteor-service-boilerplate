@@ -1,7 +1,18 @@
-import { Crud } from '../core';
-import { PingRPC, PingHandler } from './ping';
+import { CRUD } from 'meteor/centiq:crud';
+import { Mongo } from 'meteor/mongo';
+import { Class } from 'meteor/jagi:astronomy';
+import { CrudFactory, ServiceRepository } from '../core';
+import { PingService } from './ping';
 
-/**
- * Inject the CRUD and PingHandler as dependencies.
- */
-PingRPC(Crud, PingHandler);
+const Crud = CrudFactory(CRUD);
+
+const ServiceModel = ServiceRepository.ModelFactory(Mongo, Class);
+
+ServiceRepository.register(ServiceModel, {
+  ROOT_URL: process.env.ROOT_URL,
+});
+
+new PingService(Crud, {
+  ServiceModel,
+  ServiceRepository
+}, process.env.ROOT_URL);
