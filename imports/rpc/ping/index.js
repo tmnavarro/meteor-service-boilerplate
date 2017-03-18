@@ -1,9 +1,8 @@
 
 export class PingService {
 
-  constructor(Crud, { ServiceModel, ServiceRepository }, ROOT_URL) {
+  constructor(Crud, ServiceRepository) {
 
-    this.ServiceModel = ServiceModel;
     this.ServiceRepository = ServiceRepository;
 
     ServiceRepository.registerEndpoint({
@@ -11,20 +10,18 @@ export class PingService {
       type: 'read',
       name: 'ping',
       handler: this.endpoint.bind(this),
-      ROOT_URL,
-      ServiceModel,
     });
 
   }
 
   endpoint(req, res) {
 
-    this.ServiceRepository.networkCall(this.ServiceModel, 'ping', 'read', {
+    this.ServiceRepository.networkCall('ping', 'read', {
       argument1: true,
       argument1: false,
     })
 
-    res.end(this.ServiceModel.find());
+    res.end(this.ServiceRepository.services());
 
   }
 

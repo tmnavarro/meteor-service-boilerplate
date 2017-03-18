@@ -1,15 +1,28 @@
 
 export class ServiceRepository {
 
-  static GetServices(ServiceModel) {
+  constructor({Mongo, AstroClass, ROOT_URL}) {
 
-    return ServiceModel.find();
+    this.model = this.modelFactory(Mongo, AstroClass);
+    this.ROOT_URL = ROOT_URL;
+
+    try {
+
+      const service = new this.model();
+      service._id = ROOT_URL;
+      service.save();
+
+    } catch(e) {
+
+      // duplicate keys
+
+    }
 
   }
 
-  static ModelFactory(Mongo, Class) {
+  modelFactory(Mongo, AstroClass) {
 
-    return Class.create({
+    return AstroClass.create({
       name: 'Services',
       collection: new Mongo.Collection('services'),
       fields: {
@@ -39,24 +52,15 @@ export class ServiceRepository {
 
   }
 
-  static register(ServiceModel, { ROOT_URL }) {
+  services() {
 
-
-    try {
-
-      const service = new ServiceModel();
-      service._id = ROOT_URL;
-      service.save();
-
-    } catch(e) {
-      // duplicate keys
-    }
+    return this.model.find();
 
   }
 
-  static registerEndpoint({ Crud, type, name, handler, ROOT_URL, ServiceModel}) {
+  registerEndpoint({ Crud, type, name, handler}) {
 
-    const service = ServiceModel.findOne(ROOT_URL);
+    const service = this.model.findOne(this.ROOT_URL);
 
     service.endpoints[name] = {
       type,
@@ -76,11 +80,11 @@ export class ServiceRepository {
   }
 
   // find a service that fufills the call.
-  static networkCall(ServiceModel, name, type, args) {
+  networkCall(name, type, args) {
 
     const index = `endpoints.${name}.type`;
 
-    const service = ServiceModel.find({
+    const service = this.model.find({
       [index]: type,
     },
     {
