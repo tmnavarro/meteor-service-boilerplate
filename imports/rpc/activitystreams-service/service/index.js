@@ -1,22 +1,36 @@
+/**
+ * Activity strea is a singleton
+ */
+
+let instance = null;
+
 export class ActivityStreamService {
 
   constructor(Crud, ServiceRepository, ActivityStreamRepository) {
 
-    this.ActivityStreamRepository = ActivityStreamRepository;
+    if (!instance) {
 
-    ServiceRepository.registerEndpoint({
-      Crud,
-      type: 'create',
-      name: 'activity',
-      handler: this.createEndpoint.bind(this),
-    });
+      instance = this;
 
-    ServiceRepository.registerEndpoint({
-      Crud,
-      type: 'read',
-      name: 'activity',
-      handler: this.readEndpoint.bind(this),
-    });
+      this.ActivityStreamRepository = ActivityStreamRepository;
+
+      ServiceRepository.registerEndpoint({
+        Crud,
+        type: 'create',
+        name: 'activity',
+        handler: this.createEndpoint.bind(this),
+      });
+
+      ServiceRepository.registerEndpoint({
+        Crud,
+        type: 'read',
+        name: 'activity',
+        handler: this.readEndpoint.bind(this),
+      });
+
+    }
+
+    return instance;
 
   }
 
