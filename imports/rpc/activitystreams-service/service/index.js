@@ -34,9 +34,52 @@ export class ActivityStreamService {
 
   }
 
+  static checkReadArguments(args) {
+
+    const { objectType, verb, ...extraArgs } = args;
+
+    if (Object.keys(extraArgs).length)
+      throw new Error(`Passed unexpected argument, I dont trust you!`);
+
+    if (typeof objectType !== 'string')
+      throw new Error(`objectType must be a string not ${typeof args.objectType}`);
+
+    if (typeof verb !== 'string')
+      throw new Error(`verb must be a string not ${typeof args.verb}`);
+
+  }
+
   readEndpoint(req, res) {
 
-    res.end(this.ActivityStreamRepository.find());
+    // then as an integration test we would run all of this
+    // under a real database.
+
+    // this means we can unit test this
+    const args = this.parseReadArguments(req.args);
+
+    // we would check that this find got the arguments expected
+    const activities = this.ActivityStreamRepository.find(args);
+
+    // and this would allow us to unit test this function.
+    res.end(this.doSomthingWithActivities(activities));
+
+  }
+
+  static checkCreateArguments(args) {
+
+    const { objectType, actor, verb, ...extraArgs } = args;
+
+    if (Object.keys(extraArgs).length)
+      throw new Error('Passed unexpected argument, I dont trust you!')
+
+    if (typeof objectType !== 'string')
+      throw new Error(`objectType must be a string not ${typeof objectType}`)
+
+    if (typeof actor !== 'string')
+      throw new Error(`actor must be a string not ${typeof actor}`)
+
+    if (typeof verb !== 'string')
+      throw new Error(`actor must be a string not ${typeof verb}`)
 
   }
 
