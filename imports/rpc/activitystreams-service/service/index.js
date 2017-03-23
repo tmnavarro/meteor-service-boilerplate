@@ -51,18 +51,6 @@ export class ActivityStreamService {
 
   readEndpoint(req, res) {
 
-    // then as an integration test we would run all of this
-    // under a real database.
-
-    // this means we can unit test this
-    const args = this.parseReadArguments(req.args);
-
-    // we would check that this find got the arguments expected
-    const activities = this.ActivityStreamRepository.find(args);
-
-    // and this would allow us to unit test this function.
-    res.end(this.doSomthingWithActivities(activities));
-
   }
 
   static checkCreateArguments(args) {
@@ -84,12 +72,6 @@ export class ActivityStreamService {
   }
 
   createEndpoint(req, res) {
-
-    // mock the get method to set method.
-
-    // here I should be able to call find and insert data either into mongo or an array of staic objects.
-
-    res.end({ });
 
   }
 
