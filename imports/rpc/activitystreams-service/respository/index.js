@@ -11,15 +11,11 @@ export class ActivityStreamRepository {
 
     this.ORM = ORM;
 
-    if (!process.env.UNIT_TESTING) {
+    const ASObj = ASObjectFactory(ORM);
+    ActivityFactory(ORM, Mongo, ASObj);
 
-      const ASObj = ASObjectFactory(ORM);
-      ActivityFactory(ORM, Mongo, ASObj);
-
-      PageElementFactory(ORM);
-      PersonFactory(ORM);
-
-    }
+    PageElementFactory(ORM);
+    PersonFactory(ORM);
 
 
   }

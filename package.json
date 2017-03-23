@@ -3,9 +3,9 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "test": "UNIT_TESTING=true mocha 'imports/**/*.spec.js' --compilers js:babel-register",
-    "test-watch": "UNIT_TESTING=true yarn test -- -w",
-    "cucumber": "UNIT_TESTING=true cucumber-js --compiler es6:babel-core/register"
+    "test": "mocha 'imports/**/*.spec.js' --compilers js:babel-register",
+    "test-watch": "yarn test -- -w",
+    "cucumber": "cucumber-js --compiler es6:babel-core/register"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
