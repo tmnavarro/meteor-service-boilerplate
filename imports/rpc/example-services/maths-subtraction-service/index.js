@@ -1,6 +1,6 @@
 let instance = null;
 
-export class MathTakeawayService {
+export class MathSubtractionService {
 
   constructor(Crud, ServiceRepository) {
 
@@ -11,8 +11,8 @@ export class MathTakeawayService {
       ServiceRepository.registerEndpoint({
         Crud,
         type: 'read',
-        name: 'takeawayNumbers',
-        handler: MathTakeawayService.endpoint,
+        name: 'subtractionNumbers',
+        handler: MathSubtractionService.endpoint,
       });
 
     }
@@ -21,7 +21,7 @@ export class MathTakeawayService {
 
   }
 
-  static checkTakeawayArguments(args) {
+  static checkSubtractionArguments(args) {
 
     const { values, ...extraArgs } = args;
 
@@ -33,7 +33,7 @@ export class MathTakeawayService {
 
   }
 
-  static takeaway(numbers) {
+  static subtraction(numbers) {
 
     if (!Array.isArray(numbers))
       throw new Error(`Arguments must be an array not ${typeof numbers}`);
@@ -44,9 +44,9 @@ export class MathTakeawayService {
 
   static endpoint(req, res) {
 
-    MathTakeawayService.checkTakeawayArguments(req.args)
+    MathSubtractionService.checkSubtractionArguments(req.args)
 
-    res.end(MathTakeawayService.takeaway(req.args.values));
+    res.end(MathSubtractionService.subtraction(req.args.values));
 
   }
 

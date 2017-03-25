@@ -1,8 +1,8 @@
 import sinon from 'sinon';
 import { expect } from 'chai';
-import { MathTakeawayService } from './index';
+import { MathSubtractionService } from './index';
 
-describe('Math Takeaway Service', function() {
+describe('Math Subtraction Service', function() {
 
   describe('Endpoint', function() {
 
@@ -19,7 +19,7 @@ describe('Math Takeaway Service', function() {
         },
       }
 
-      MathTakeawayService.endpoint(req, res);
+      MathSubtractionService.endpoint(req, res);
 
       expect(resSpy.withArgs(-150).calledOnce).to.eql(true);
 
@@ -31,7 +31,7 @@ describe('Math Takeaway Service', function() {
 
         const fn = () => {
 
-          MathTakeawayService.checkTakeawayArguments({
+          MathSubtractionService.checkSubtractionArguments({
             values: [123, 30, 2],
           });
 
@@ -45,7 +45,7 @@ describe('Math Takeaway Service', function() {
 
         const fn_string = () => {
 
-          MathTakeawayService.checkTakeawayArguments({
+          MathSubtractionService.checkSubtractionArguments({
             values: '123',
           });
 
@@ -53,7 +53,7 @@ describe('Math Takeaway Service', function() {
 
         const fn_number = () => {
 
-          MathTakeawayService.checkTakeawayArguments({
+          MathSubtractionService.checkSubtractionArguments({
             values: '123',
           });
 
@@ -61,7 +61,7 @@ describe('Math Takeaway Service', function() {
 
         const fn_object = () => {
 
-          MathTakeawayService.checkTakeawayArguments({
+          MathSubtractionService.checkSubtractionArguments({
             values: {},
           });
 
@@ -69,7 +69,7 @@ describe('Math Takeaway Service', function() {
 
         const fn_undefined = () => {
 
-          MathTakeawayService.checkTakeawayArguments();
+          MathSubtractionService.checkSubtractionArguments();
 
         }
 
@@ -84,7 +84,7 @@ describe('Math Takeaway Service', function() {
 
         const fn = () => {
 
-          MathTakeawayService.checkTakeawayArguments({
+          MathSubtractionService.checkSubtractionArguments({
             extraArgs: 123,
             values: [123, 123, 123],
           });
@@ -99,10 +99,10 @@ describe('Math Takeaway Service', function() {
 
     describe('Method', function() {
 
-      it('Should takeaway numbers together in array', function() {
+      it('Should subtraction numbers together in array', function() {
 
-        const result  = MathTakeawayService.takeaway([30, 20, 1]);
-        const result2 = MathTakeawayService.takeaway([300, 20, 20]);
+        const result  = MathSubtractionService.subtraction([30, 20, 1]);
+        const result2 = MathSubtractionService.subtraction([300, 20, 20]);
 
         expect(result).to.eql(-51);
         expect(result2).to.eql(-340);
@@ -111,8 +111,8 @@ describe('Math Takeaway Service', function() {
 
       it('Arguments should be an array and throw if anything else', function() {
 
-        const fn = () => MathTakeawayService.takeaway('thing');
-        const fn2 = () => MathTakeawayService.takeaway(100);
+        const fn = () => MathSubtractionService.subtraction('thing');
+        const fn2 = () => MathSubtractionService.subtraction(100);
 
         expect(fn).to.throw();
         expect(fn2).to.throw();
