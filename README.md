@@ -35,32 +35,56 @@ version: '2'
 
 services:
 
-  ms-boilerplate:
+  ms-ping:
     image: redleap/ms-boilerplate
     environment:
       - PORT=3000
       - ROOT_URL=http://localhost:3000
-      - MONGO_URL=mongodb://mongo:27017/ms-boilerplate
+      - MONGO_URL=mongodb://mongo:27017/services
     depends_on:
       - mongo
     ports:
       - 3000:3000
 
-  ms-boilerplat-service2:
-    image: redleap/ms-boilerplate
+  ms-addition-service:
+    image: redleap/ms-addition-service
     environment:
       - PORT=4000
       - ROOT_URL=http://localhost:4000
-      - MONGO_URL=mongodb://mongo:27017/ms-boilerplate-service2
+      - MONGO_URL=mongodb://mongo:27017/services
     depends_on:
       - mongo
     ports:
       - 4000:4000
 
+  ms-subtraction-service:
+    image: redleap/ms-subtraction-service
+    environment:
+      - PORT=5000
+      - ROOT_URL=http://localhost:5000
+      - MONGO_URL=mongodb://mongo:27017/services
+    depends_on:
+      - mongo
+    ports:
+      - 5000:5000
+
+  ms-times-service:
+    image: redleap/ms-times-service
+    environment:
+      - PORT=6000
+      - ROOT_URL=http://localhost:6000
+      - MONGO_URL=mongodb://mongo:27017/services
+    depends_on:
+      - mongo
+    ports:
+      - 6000:6000
+
+
   mongo:
     image: mongo:3.2
     volumes:
       - ./data/db:/data/db
+
 
 ```
 
