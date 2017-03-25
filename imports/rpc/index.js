@@ -8,3 +8,4 @@ import { Crud } from './crud';
 new PingService(Crud, ServiceRepository);
 new MathAdditionService(Crud, ServiceRepository);
 new MathTakeawayService(Crud, ServiceRepository);
+new MathTimesService(Crud, ServiceRepository);
