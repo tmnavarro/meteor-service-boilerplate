@@ -62,7 +62,7 @@ export class ServiceRepository {
 
     const service = this.model.findOne(this.ROOT_URL);
 
-    service.endpoints[name] = {
+    service.endpoints[`${name}.${type}`] = {
       type,
     };
 
